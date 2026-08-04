@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f3ef;
+  --surface: #fffdfc;
+  --surface-muted: #efe7e2;
+  --foreground: #272324;
+  --foreground-muted: #6b625f;
+  --brand: #c71838;
+  --brand-hover: #b21130;
+  --brand-active: #990d28;
+  --brand-foreground: #ffffff;
+  --border: #ded3cd;
+  --border-strong: #bfafa8;
+  --ring: #6a111d;
+  --hero-background: #d8cec4;
+  --dark-section: #3b2529;
+  --dark-section-foreground: #f9f5f1;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --shadow-soft: 0 8px 24px rgb(106 17 29 / 0.08);
+  --container-main: 80rem;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+  --color-hero-background: var(--hero-background);
+  --color-dark-section: var(--dark-section);
+  --color-dark-section-foreground: var(--dark-section-foreground);
+  --font-sans: "Manrope", system-ui, Arial, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --shadow-soft: var(--shadow-soft);
+  --container-container-main: var(--container-main);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Manrope", system-ui, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Hero: mobile fullscreen image ── */
+.hero-mobile-bg {
+  object-position: center top;
+  transform: scale(1.16) translate(-2%, -8.5%);
+}
+
+/* ── Hero: mobile gradient overlay (continuous, no hard edge) ── */
+.hero-mobile-gradient {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(39, 35, 36, 0.12) 58%,
+    rgba(39, 35, 36, 0.42) 70%,
+    rgba(39, 35, 36, 0.72) 82%,
+    rgba(39, 35, 36, 0.88) 95%
+  );
+}
+
+/* ── Hero: desktop image ── */
+.hero-image {
+  object-position: 82% center;
+  transform: scale(2.4);
+  transform-origin: right 70%;
+}
+
+@media (min-width: 768px) {
+  .hero-image {
+    object-position: 50% center;
+    transform: none;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--foreground);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

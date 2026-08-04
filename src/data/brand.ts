@@ -1,0 +1,8 @@
+export const brandImages = {
+  logo: {
+    header: "/images/brand/logos/bellissimo-logo-horizontal-light.png",
+    footer: "/images/brand/logos/bellissimo-logo-horizontal-light.png",
+    mark: "/images/brand/icons/bellissimo-mark-tooth-red.png",
+    badge: "/images/brand/logos/bellissimo-badge-square-red.png",
+  },
+} as const;
