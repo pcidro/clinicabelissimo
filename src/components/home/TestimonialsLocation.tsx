@@ -1,15 +1,92 @@
-import { Clock, ExternalLink, MapPin, MessageCircle, Quote } from "lucide-react";
+import { Clock, ExternalLink, MapPin, MessageCircle, Star } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { clinic } from "@/data/clinic";
-import { testimonials } from "@/data/testimonials";
 import { createWhatsAppLink } from "@/lib/whatsapp";
+import { getGoogleReviews, type GoogleReview } from "@/services/google-places";
 
 const appointmentMessage =
   "Olá! Conheci a Clínica Bellissimo pelo site e gostaria de agendar uma avaliação.";
 
-export function TestimonialsLocation() {
+function ReviewStars({ rating }: { rating: number }) {
+  const filledStars = Math.round(rating);
+
+  return (
+    <div
+      className="flex items-center gap-1 text-brand"
+      role="img"
+      aria-label={`${rating} de 5 estrelas`}
+    >
+      {Array.from({ length: 5 }, (_, index) => (
+        <Star
+          key={index}
+          size={18}
+          strokeWidth={1.8}
+          fill={index < filledStars ? "currentColor" : "none"}
+          className={index < filledStars ? "text-brand" : "text-border-strong"}
+          aria-hidden="true"
+        />
+      ))}
+    </div>
+  );
+}
+
+function GoogleReviewCard({ review }: { review: GoogleReview }) {
+  return (
+    <li>
+      <figure className="rounded-[18px] border border-border border-t-2 border-t-brand bg-surface p-6 md:p-7">
+        <ReviewStars rating={review.rating} />
+
+        <blockquote className="mt-5 text-base leading-[1.75] text-foreground sm:text-lg">
+          “{review.text}”
+        </blockquote>
+
+        <figcaption className="mt-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            {review.authorName ? (
+              review.authorUri ? (
+                <a
+                  href={review.authorUri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-sm text-sm font-bold leading-[1.4] text-foreground transition-colors duration-160 hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none"
+                >
+                  {review.authorName}
+                </a>
+              ) : (
+                <p className="text-sm font-bold leading-[1.4] text-foreground">
+                  {review.authorName}
+                </p>
+              )
+            ) : null}
+            <p className="mt-1 text-sm leading-[1.5] text-foreground-muted">
+              Google
+              {review.relativePublishTime
+                ? ` · ${review.relativePublishTime}`
+                : ""}
+            </p>
+          </div>
+
+          {review.googleMapsUri ? (
+            <a
+              href={review.googleMapsUri}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors duration-160 hover:text-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none"
+            >
+              Ver no Google
+              <ExternalLink size={16} strokeWidth={1.8} aria-hidden="true" />
+            </a>
+          ) : null}
+        </figcaption>
+      </figure>
+    </li>
+  );
+}
+
+export async function TestimonialsLocation() {
+  const googleReviews = await getGoogleReviews();
   const whatsappUrl = createWhatsAppLink({
     phone: clinic.contact.whatsappNumber,
     message: appointmentMessage,
@@ -17,6 +94,10 @@ export function TestimonialsLocation() {
   const encodedAddress = encodeURIComponent(clinic.location.fullAddress);
   const mapEmbedUrl = `https://www.google.com/maps?q=${encodedAddress}&output=embed`;
   const mapLinkUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+  const reviewsLink = googleReviews?.googleMapsUri || mapLinkUrl;
+  const hasRatingSummary =
+    typeof googleReviews?.rating === "number" &&
+    typeof googleReviews.userRatingCount === "number";
 
   return (
     <section
@@ -32,30 +113,42 @@ export function TestimonialsLocation() {
                 Depoimentos
               </p>
               <h2 className="mt-4 font-display text-[clamp(2.25rem,4vw,3rem)] font-medium leading-[1.08] tracking-[-0.014em] text-foreground">
-                O que nossos pacientes dizem.
+                Experiências de quem confia na Bellissimo.
               </h2>
+              {hasRatingSummary ? (
+                <p className="mt-4 text-sm font-semibold leading-[1.5] text-foreground-muted">
+                  {googleReviews.rating?.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1,
+                  })}{" "}
+                  no Google · {googleReviews.userRatingCount}{" "}
+                  {googleReviews.userRatingCount === 1
+                    ? "avaliação"
+                    : "avaliações"}
+                </p>
+              ) : null}
             </header>
 
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-10 md:gap-5">
-              {testimonials.map((testimonial) => (
-                <li key={testimonial.id}>
-                  <figure className="flex h-full flex-col rounded-[18px] border border-border border-t-2 border-t-brand bg-surface p-5 md:p-6">
-                    <Quote
-                      size={20}
-                      strokeWidth={1.8}
-                      className="text-brand"
-                      aria-hidden="true"
-                    />
-                    <blockquote className="mt-4 flex-1 text-[15px] leading-[1.7] text-foreground-muted sm:text-base">
-                      {testimonial.quote}
-                    </blockquote>
-                    <figcaption className="mt-5 text-sm font-bold leading-[1.4] text-foreground">
-                      {testimonial.name}
-                    </figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
+            {googleReviews?.reviews.length ? (
+              <ul className="mt-8 space-y-5 md:mt-10">
+                {googleReviews.reviews.map((review) => (
+                  <GoogleReviewCard
+                    key={`${review.authorName}-${review.relativePublishTime}`}
+                    review={review}
+                  />
+                ))}
+              </ul>
+            ) : null}
+
+            <a
+              href={reviewsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors duration-160 hover:text-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none"
+            >
+              Ver avaliações no Google
+              <ExternalLink size={16} strokeWidth={1.8} aria-hidden="true" />
+            </a>
           </div>
 
           <aside className="relative isolate overflow-hidden rounded-[24px] bg-dark-section p-6 text-dark-section-foreground md:p-7 lg:col-span-5 lg:p-6 xl:p-7">
