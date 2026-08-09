@@ -7,12 +7,16 @@ const siteUrl = "https://clinicabelissimo.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+
   title: {
-    default: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
+    default:
+      "Clínica Odontológica Bellissimo | Seu sorriso é nossa maior satisfação",
     template: "%s | Clínica Bellissimo",
   },
+
   description:
-    "Seu Sorriso é nossa maior satisfação. Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
+    "Clínica odontológica especializada em estética do sorriso, implantes, ortodontia, endodontia e harmonização facial. Cuidado, saúde e beleza para o seu sorriso.",
+
   keywords: [
     "clínica odontológica",
     "estética do sorriso",
@@ -21,6 +25,7 @@ export const metadata: Metadata = {
     "endodontia",
     "harmonização facial",
   ],
+
   robots: {
     index: true,
     follow: true,
@@ -31,35 +36,47 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+
   icons: {
     icon: "/images/brand/icons/bellissimo-mark-tooth-red.png",
     shortcut: "/images/brand/icons/bellissimo-mark-tooth-red.png",
     apple: "/images/brand/icons/bellissimo-mark-tooth-red.png",
   },
+
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: siteUrl,
     siteName: "Clínica Bellissimo",
-    title: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
+
+    title:
+      "Clínica Odontológica Bellissimo | Seu sorriso é nossa maior satisfação",
+
     description:
-      "Seu Sorriso é nossa maior satisfação. Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
+      "Cuidado, saúde e beleza para o seu sorriso. Conheça a Clínica Bellissimo e nossos tratamentos em odontologia e estética.",
+
     images: [
       {
         url: "/images/brand/icons/bellissimo-mark-tooth-red.png",
         width: 800,
         height: 800,
-        alt: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
+        alt: "Clínica Odontológica Bellissimo",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
+
+    title:
+      "Clínica Odontológica Bellissimo | Seu sorriso é nossa maior satisfação",
+
     description:
-      "Seu Sorriso é nossa maior satisfação. Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
+      "Cuidado, saúde e beleza para o seu sorriso. Conheça a Clínica Bellissimo e nossos tratamentos em odontologia e estética.",
+
     images: ["/images/brand/icons/bellissimo-mark-tooth-red.png"],
   },
+
   alternates: {
     canonical: siteUrl,
   },
@@ -71,16 +88,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className="h-full antialiased">
-      <head>
-        <link rel="icon" href="/images/brand/icons/bellissimo-mark-tooth-red.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/brand/icons/bellissimo-mark-tooth-red.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-      </head>
-      <body className="flex min-h-full flex-col">
-        <a className="skip-link" href="#main-content">
-          Pular para o conteúdo principal
-        </a>
+    <html lang="pt-BR">
+      <body>
         <Header />
         {children}
         <Footer />
