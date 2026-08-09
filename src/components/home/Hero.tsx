@@ -45,7 +45,7 @@ export function Hero() {
       />
 
       {/* ── Mobile: conteúdo sobreposto na parte inferior ── */}
-      <div className="relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-end px-5 pb-7 text-center md:hidden">
+      <div className="relative z-10 flex min-h-[calc(100dvh-4rem)] flex-col justify-end px-5 pb-5 text-center md:hidden">
         <div className="mx-auto w-full max-w-[26rem]">
           <h1
             id="hero-title"

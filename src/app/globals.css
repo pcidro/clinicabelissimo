@@ -74,10 +74,10 @@ body {
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    transparent 45%,
-    rgba(39, 35, 36, 0.12) 58%,
-    rgba(39, 35, 36, 0.42) 70%,
-    rgba(39, 35, 36, 0.72) 82%,
+    transparent 50%,
+    rgba(39, 35, 36, 0.12) 62%,
+    rgba(39, 35, 36, 0.42) 73%,
+    rgba(39, 35, 36, 0.72) 84%,
     rgba(39, 35, 36, 0.88) 95%
   );
 }
