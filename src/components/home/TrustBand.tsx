@@ -1,102 +1,96 @@
 import Image from "next/image";
+import {
+  ClipboardCheck,
+  HeartHandshake,
+  ShieldCheck,
+  Smile,
+  type LucideIcon,
+} from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { brandImages } from "@/data/brand";
 
-type TrustPillar = {
+type CareBenefit = {
   title: string;
   description: string;
+  icon: LucideIcon;
 };
 
-const trustPillars = [
+const careBenefits = [
   {
-    title: "Atendimento personalizado",
+    title: "Atendimento humanizado",
     description:
-      "Cada atendimento começa pela escuta e pela compreensão das necessidades de cada pessoa.",
+      "Cuidado próximo, escuta atenta e atenção às necessidades de cada pessoa.",
+    icon: HeartHandshake,
   },
   {
     title: "Planejamento individual",
     description:
-      "Cada etapa é pensada com clareza, intenção e respeito às particularidades de cada caso.",
+      "Cada tratamento é pensado de acordo com as necessidades e particularidades de cada caso.",
+    icon: ClipboardCheck,
   },
   {
-    title: "Cuidado humanizado",
+    title: "Saúde, função e estética",
     description:
-      "Uma experiência próxima, acolhedora e atenta em todos os momentos.",
+      "Uma abordagem que considera o sorriso de forma completa, buscando equilíbrio, funcionalidade e naturalidade.",
+    icon: Smile,
   },
   {
-    title: "Saúde e estética em equilíbrio",
+    title: "Estrutura e cuidado clínico",
     description:
-      "Decisões que consideram o sorriso de forma completa, unindo bem-estar, função e naturalidade.",
+      "Um ambiente organizado e preparado para proporcionar conforto, atenção e segurança durante o atendimento.",
+    icon: ShieldCheck,
   },
-] satisfies readonly TrustPillar[];
+] satisfies readonly CareBenefit[];
 
 export function TrustBand() {
   return (
     <section
       aria-labelledby="trust-band-title"
-      className="relative isolate overflow-hidden bg-surface py-20 lg:py-28"
+      className="relative isolate overflow-hidden bg-surface py-16 md:py-20 lg:py-24"
     >
-      <Container>
-        <div className="grid gap-16 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
-          <div className="relative md:col-span-5 lg:pr-8">
-            <div className="relative z-10 max-w-xl">
-              <p className="flex items-center gap-3 text-xs font-bold uppercase leading-[1.3] tracking-[0.12em] text-brand">
-                <span className="h-px w-8 bg-brand" aria-hidden="true" />
-                Nosso jeito de cuidar
-              </p>
+      <Image
+        src={brandImages.logo.mark}
+        alt=""
+        width={1024}
+        height={1024}
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 top-1/2 z-0 hidden size-[36rem] -translate-y-1/2 select-none opacity-[0.045] md:block lg:-right-24 lg:size-[40rem]"
+      />
 
-              <h2
-                id="trust-band-title"
-                className="mt-6 max-w-lg font-display text-[clamp(2.5rem,4.5vw,4rem)] font-medium leading-[1.02] tracking-[-0.018em] text-foreground"
-              >
-                Cada sorriso pede um olhar único.
-              </h2>
+      <Container className="relative z-10">
+        <SectionHeader
+          eyebrow="Nosso jeito de cuidar"
+          title="Atenção aos mínimos detalhes."
+          description="Na Clínica Bellissimo, cada atendimento é conduzido com atenção, planejamento e foco no equilíbrio entre saúde, função e estética."
+          titleId="trust-band-title"
+        />
 
-              <p className="mt-6 max-w-lg text-base leading-[1.7] text-foreground-muted sm:text-lg">
-                Da primeira conversa ao resultado final, cada escolha deve
-                respeitar as necessidades, o bem-estar e a individualidade de
-                quem confia em nosso cuidado.
-              </p>
-            </div>
+        <ul className="mt-10 grid gap-x-8 gap-y-10 md:mt-12 md:grid-cols-2 md:gap-y-12 xl:grid-cols-4">
+          {careBenefits.map((benefit) => {
+            const Icon = benefit.icon;
 
-            <Image
-              src={brandImages.logo.mark}
-              alt=""
-              width={1024}
-              height={1024}
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-28 -right-16 -z-10 size-72 select-none opacity-[0.07] md:-bottom-36 md:-right-28 md:size-96 lg:-right-36 lg:size-[28rem]"
-            />
-          </div>
-
-          <ol className="md:col-span-7 md:col-start-6 lg:col-span-6 lg:col-start-7">
-            {trustPillars.map((pillar, index) => (
-              <li
-                key={pillar.title}
-                className={`border-t border-border py-7 last:border-b md:py-8 lg:py-10 ${
-                  index % 2 === 1 ? "md:ml-8 lg:ml-12" : ""
-                }`}
-              >
-                <article className="grid grid-cols-[2rem_1fr] gap-x-4 sm:grid-cols-[2.5rem_1fr] sm:gap-x-5">
-                  <span
-                    className="pt-1 text-xs font-bold leading-none tracking-[0.12em] text-brand"
-                    aria-hidden="true"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-[clamp(1.625rem,2.5vw,2.125rem)] font-semibold leading-[1.12] tracking-[-0.01em] text-foreground">
-                      {pillar.title}
-                    </h3>
-                    <p className="mt-3 max-w-xl text-base leading-[1.65] text-foreground-muted">
-                      {pillar.description}
-                    </p>
+            return (
+              <li key={benefit.title} className="relative z-10">
+                <article>
+                  <div className="flex size-12 items-center justify-center rounded-[14px] bg-surface-muted text-brand">
+                    <Icon
+                      size={24}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
                   </div>
+                  <h3 className="mt-5 font-display text-[clamp(1.5rem,2vw,1.75rem)] font-semibold leading-[1.15] tracking-[-0.01em] text-foreground">
+                    {benefit.title}
+                  </h3>
+                  <p className="mt-3 max-w-[34rem] text-[15px] leading-[1.65] text-foreground-muted sm:text-base">
+                    {benefit.description}
+                  </p>
                 </article>
               </li>
-            ))}
-          </ol>
-        </div>
+            );
+          })}
+        </ul>
       </Container>
     </section>
   );

@@ -37,6 +37,7 @@ export function Header() {
             rel="noopener noreferrer"
             className="shrink-0"
           >
+            <i className="fa-brands fa-whatsapp mr-2 text-lg"></i>
             Agendar avaliação
           </Button>
         </div>

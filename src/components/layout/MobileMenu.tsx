@@ -139,6 +139,7 @@ export function MobileMenu({ items, whatsappUrl }: MobileMenuProps) {
                 onClick={closeMenu}
                 className="mt-8 w-full"
               >
+                <i className="fa-brands fa-whatsapp mr-2 text-lg"></i>
                 Agendar avaliação
               </Button>
             </nav>

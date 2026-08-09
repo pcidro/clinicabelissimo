@@ -64,6 +64,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="w-full min-h-11 px-4 text-sm font-bold justify-center rounded-xl !whitespace-normal sm:w-auto"
             >
+              <i className="fa-brands fa-whatsapp mr-2 text-lg"></i>
               {hero.primaryAction}
             </Button>
             <Button
@@ -117,6 +118,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <i className="fa-brands fa-whatsapp text-white mr-2 text-lg"></i>
               {hero.primaryAction}
             </Button>
             <Button

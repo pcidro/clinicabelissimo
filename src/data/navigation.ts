@@ -11,3 +11,11 @@ export const mainNavigation: readonly NavigationItem[] = [
   { label: "Resultados", href: "/#resultados" },
   { label: "Contato", href: "/#contato" },
 ];
+
+export const footerNavigation: readonly NavigationItem[] = [
+  { label: "Início", href: "/" },
+  { label: "A clínica", href: "/#a-clinica" },
+  { label: "Tratamentos", href: "/#tratamentos" },
+  { label: "Resultados", href: "/#resultados" },
+  { label: "Contato", href: "/#contato" },
+];
