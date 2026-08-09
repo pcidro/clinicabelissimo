@@ -3,23 +3,34 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://clinicabelissimo.vercel.app";
+const siteUrl = "https://clinicabelissimo.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
+  title: {
+    default: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
+    template: "%s | Clínica Bellissimo",
+  },
   description:
     "Seu Sorriso é nossa maior satisfação. Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
   keywords: [
-    "Clínica Odontológica",
-    "Dentista Água Rasa",
-    "Estética Dental",
-    "Odontologia São Paulo",
-    "Clínica Bellissimo",
-    "Dra. Aline Bellissimo",
-    "Tratamento Odontológico",
+    "clínica odontológica",
+    "estética do sorriso",
+    "implantes dentários",
+    "ortodontia",
+    "endodontia",
+    "harmonização facial",
   ],
-  authors: [{ name: "Clínica Bellissimo" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/images/brand/icons/bellissimo-mark-tooth-red.png",
     shortcut: "/images/brand/icons/bellissimo-mark-tooth-red.png",
@@ -29,10 +40,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: siteUrl,
+    siteName: "Clínica Bellissimo",
     title: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
     description:
       "Seu Sorriso é nossa maior satisfação. Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
-    siteName: "Clínica Bellissimo",
     images: [
       {
         url: "/images/brand/icons/bellissimo-mark-tooth-red.png",
@@ -43,15 +54,14 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Clínica Bellissimo — Seu Sorriso é nossa maior satisfação",
     description:
       "Seu Sorriso é nossa maior satisfação. Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
     images: ["/images/brand/icons/bellissimo-mark-tooth-red.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
+  alternates: {
+    canonical: siteUrl,
   },
 };
 
