@@ -38,8 +38,7 @@ export function Footer() {
             </Link>
 
             <p className="mt-6 max-w-md text-base leading-[1.7] text-foreground-muted">
-              Cuidado odontológico com atenção, planejamento e respeito à
-              individualidade de cada sorriso.
+              Seu sorriso é nossa maior satisfação
             </p>
 
             <div

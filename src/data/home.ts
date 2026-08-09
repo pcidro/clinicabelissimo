@@ -1,9 +1,9 @@
 export const homeContent = {
   hero: {
     eyebrow: "Clínica odontológica em São Paulo",
-    title: "Excelência para transformar a forma como você sorri.",
+    title: "Seu Sorriso é nossa maior satisfação.",
     description:
-      "Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas.",
+      "Na Clínica Bellissimo, cada tratamento é planejado de maneira individual, unindo saúde, estética e uma experiência acolhedora em todas as etapas",
     primaryAction: "Agendar avaliação",
     secondaryAction: "Conhecer tratamentos",
     signature: "Clínica Bellissimo — seu sorriso, nossa paixão.",
