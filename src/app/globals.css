@@ -63,6 +63,12 @@ body {
   transform: scale(1.16) translate(-2%, -8.5%);
 }
 
+@media (min-width: 390px) and (max-width: 430px) and (min-height: 800px) and (max-height: 900px) {
+  .iphone-13-hero {
+    object-position: 72% center;
+  }
+}
+
 /* ── Hero: mobile gradient overlay (continuous, no hard edge) ── */
 .hero-mobile-gradient {
   background: linear-gradient(

@@ -35,7 +35,7 @@ export function Hero() {
         sizes="100vw"
         loading="eager"
         fetchPriority="high"
-        className="hero-mobile-bg absolute inset-0 -z-20 size-full object-cover md:hidden"
+        className="hero-mobile-bg iphone-13-hero absolute inset-0 -z-20 size-full object-cover md:hidden"
       />
 
       {/* ── Mobile: gradiente contínuo sobre a imagem ── */}
