@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Clínica Odontológica Bellissimo | Seu sorriso é nossa maior satisfação",
+      "Clínica Odontológica Bellissimo na Água Rasa | São Paulo",
     template: "%s | Clínica Bellissimo",
   },
 
